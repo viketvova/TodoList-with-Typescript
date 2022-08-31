@@ -13,6 +13,7 @@ type PropsType = {
   removeTask: (id: string) => void;
   changeFilter: (filter: FilterValueType) => void;
   addTask: (title: string) => void;
+  changeCheckbox: (id: string) => void;
 };
 
 export function Todolist(props: PropsType) {
@@ -29,6 +30,7 @@ export function Todolist(props: PropsType) {
       addTaskButton();
     }
   }
+
   function onAllButtonClick() {
     props.changeFilter("All");
   }
@@ -52,11 +54,21 @@ export function Todolist(props: PropsType) {
       </div>
       <ul>
         {props.tasks.map((task) => {
+          function removeTask() {
+            props.removeTask(task.id);
+          }
+          function changeCheckbox() {
+            props.changeCheckbox(task.id);
+          }
           return (
             <li key={task.id}>
-              <input type="checkbox" checked={task.isDone} />
+              <input
+                type="checkbox"
+                checked={task.isDone}
+                onChange={changeCheckbox}
+              />
               <span>{task.title}</span>
-              <button onClick={() => props.removeTask(task.id)}>X</button>
+              <button onClick={removeTask}>X</button>
             </li>
           );
         })}

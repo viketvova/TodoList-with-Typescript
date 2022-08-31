@@ -30,12 +30,18 @@ function App() {
     setFilter(filter);
   }
 
-  let newTasks = tasks;
+  function changeCheckbox(id: any) {
+    let newTasks = tasks;
+    newTasks.map((el) => (el.id === id ? (el.isDone = !el.isDone) : el.isDone));
+    setTasks([...newTasks]);
+  }
+
+  let todolistTasks = tasks;
   if (filter === "Active") {
-    newTasks = tasks.filter((el) => !el.isDone);
+    todolistTasks = tasks.filter((el) => !el.isDone);
   }
   if (filter === "Completed") {
-    newTasks = tasks.filter((el) => el.isDone);
+    todolistTasks = tasks.filter((el) => el.isDone);
   }
 
   return (
@@ -43,10 +49,11 @@ function App() {
       <Todolist
         title="New"
         placeholder="Write text"
-        tasks={newTasks}
+        tasks={todolistTasks}
         removeTask={removeTask}
         changeFilter={changeFilter}
         addTask={addTask}
+        changeCheckbox={changeCheckbox}
       />
     </div>
   );
