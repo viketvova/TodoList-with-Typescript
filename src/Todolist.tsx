@@ -14,6 +14,7 @@ type PropsType = {
   changeFilter: (filter: FilterValueType) => void;
   addTask: (title: string) => void;
   changeCheckbox: (id: string) => void;
+  filter: FilterValueType;
 };
 
 export function Todolist(props: PropsType) {
@@ -88,9 +89,24 @@ export function Todolist(props: PropsType) {
         })}
       </ul>
       <div>
-        <button onClick={onAllButtonClick}>All</button>
-        <button onClick={onActiveButtonClick}>Active</button>
-        <button onClick={onCompletedButtonClick}>Completed</button>
+        <button
+          onClick={onAllButtonClick}
+          className={props.filter === "All" ? "active-filter" : ""}
+        >
+          All
+        </button>
+        <button
+          onClick={onActiveButtonClick}
+          className={props.filter === "Active" ? "active-filter" : ""}
+        >
+          Active
+        </button>
+        <button
+          onClick={onCompletedButtonClick}
+          className={props.filter === "Completed" ? "active-filter" : ""}
+        >
+          Completed
+        </button>
       </div>
     </div>
   );
