@@ -1,19 +1,20 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 import { FilterValueType } from "./App";
 
-type TasksType = {
+export type TaskType = {
   id: string;
   title: string;
   isDone: boolean;
 };
 type PropsType = {
+  id: string;
   title: string;
   placeholder: string;
-  tasks: Array<TasksType>;
-  removeTask: (id: string) => void;
-  changeFilter: (filter: FilterValueType) => void;
-  addTask: (title: string) => void;
-  changeCheckbox: (id: string) => void;
+  tasks: TaskType[];
+  removeTask: (id: string, todolistId: string) => void;
+  changeFilter: (filter: FilterValueType, id: string) => void;
+  addTask: (title: string, id: string) => void;
+  changeCheckbox: (id: string, todolistId: string) => void;
   filter: FilterValueType;
 };
 
@@ -30,7 +31,7 @@ export function Todolist(props: PropsType) {
   }
   function addTaskButton() {
     if (input.trim() !== "") {
-      props.addTask(input.trim());
+      props.addTask(input.trim(), props.id);
       setInput("");
     } else {
       setError(true);
@@ -43,13 +44,13 @@ export function Todolist(props: PropsType) {
   }
 
   function onAllButtonClick() {
-    props.changeFilter("All");
+    props.changeFilter("All", props.id);
   }
   function onActiveButtonClick() {
-    props.changeFilter("Active");
+    props.changeFilter("Active", props.id);
   }
   function onCompletedButtonClick() {
-    props.changeFilter("Completed");
+    props.changeFilter("Completed", props.id);
   }
   return (
     <div>
@@ -70,10 +71,10 @@ export function Todolist(props: PropsType) {
       <ul>
         {props.tasks.map((task) => {
           function removeTask() {
-            props.removeTask(task.id);
+            props.removeTask(task.id, props.id);
           }
           function changeCheckbox() {
-            props.changeCheckbox(task.id);
+            props.changeCheckbox(task.id, props.id);
           }
           return (
             <li key={task.id} className={task.isDone ? "is-done" : ""}>
