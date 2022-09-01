@@ -61,6 +61,12 @@ function App() {
     setTasks({ ...newTasks });
   }
 
+  function deleteTodolist(todolistId: string) {
+    setTodolists(todolists.filter((el) => el.id !== todolistId));
+    delete tasks[todolistId];
+    setTasks({ ...tasks });
+  }
+
   return (
     <div className="App">
       {todolists.map((el) => {
@@ -84,6 +90,7 @@ function App() {
             addTask={addTask}
             changeCheckbox={changeCheckbox}
             filter={el.filter}
+            deleteTodolist={deleteTodolist}
           />
         );
       })}
