@@ -1,8 +1,7 @@
 import React, { ChangeEvent, KeyboardEvent, useState } from "react";
 
 type PropsType = {
-  addTask: (title: string, id: string) => void;
-  id: string;
+  addItem: (title: string) => void;
   placeholder: string;
 };
 
@@ -15,12 +14,14 @@ export function AddItemForm(props: PropsType) {
       setInput(e.currentTarget.value);
     } else {
       setError(true);
+      setInput("");
     }
   }
   function addTaskButton() {
     if (input.trim() !== "") {
-      props.addTask(input.trim(), props.id);
+      props.addItem(input.trim());
       setInput("");
+      setError(false);
     } else {
       setError(true);
     }

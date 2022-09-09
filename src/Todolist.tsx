@@ -34,17 +34,16 @@ export function Todolist(props: PropsType) {
   function onCompletedButtonClick() {
     props.changeFilter("Completed", props.id);
   }
+  function AddTask(title: string) {
+    props.addTask(title, props.id);
+  }
   return (
     <div>
       <h3>
         {props.title}
         <button onClick={deleteTodolist}>X</button>
       </h3>
-      <AddItemForm
-        addTask={props.addTask}
-        id={props.id}
-        placeholder={props.placeholder}
-      />
+      <AddItemForm addItem={AddTask} placeholder={props.placeholder} />
 
       <ul>
         {props.tasks.map((task) => {
