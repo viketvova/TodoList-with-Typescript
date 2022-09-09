@@ -34,6 +34,27 @@ function App() {
     ],
   });
 
+  function onTodolistTitleChange(todolistId: string, title: string) {
+    let newTodolist = todolists;
+    newTodolist.map((el) =>
+      el.id === todolistId ? (el.title = title) : el.title
+    );
+    setTodolists([...newTodolist]);
+  }
+
+  function onTaskTitleChange(
+    todolistId: string,
+    taskId: string,
+    newTitle: string
+  ) {
+    let newTasks = tasks;
+    console.log(todolistId, taskId, newTitle);
+    newTasks[todolistId].map((el) =>
+      el.id === taskId ? (el.title = newTitle) : el.title
+    );
+    setTasks({ ...newTasks });
+  }
+
   function addTodolist(title: string) {
     let newTodolistId = v1();
     let newTodolist: TodolistsType = {
@@ -108,6 +129,8 @@ function App() {
             changeCheckbox={changeCheckbox}
             filter={el.filter}
             deleteTodolist={deleteTodolist}
+            onTaskTitleChange={onTaskTitleChange}
+            onTodolistTitleChange={onTodolistTitleChange}
           />
         );
       })}
