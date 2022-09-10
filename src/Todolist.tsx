@@ -2,6 +2,14 @@ import React from "react";
 import { FilterValueType } from "./App";
 import { AddItemForm } from "./AddItemForm";
 import { EditableSpan } from "./EditableSpan";
+import IconButton from "@material-ui/core/IconButton/IconButton";
+import DeleteIcon from '@material-ui/icons/Delete';
+import Button from "@material-ui/core/Button";
+import createTheme  from '@material-ui/core/styles/createTheme';
+import { ThemeProvider } from "@material-ui/styles";
+import  Checkbox from "@material-ui/core/Checkbox/Checkbox";
+
+
 
 export type TaskType = {
   id: string;
@@ -26,6 +34,14 @@ type PropsType = {
   ) => void;
   onTodolistTitleChange: (todolistId: string, title: string) => void;
 };
+const theme = createTheme({
+  palette: {
+    secondary: {
+      // This is green.A700 as hex.
+      main: "#19857b",
+    },
+  },
+});
 
 export function Todolist(props: PropsType) {
   function onTodolistTitleChange(title: string) {
@@ -55,7 +71,9 @@ export function Todolist(props: PropsType) {
           title={props.title}
           onTitleChange={onTodolistTitleChange}
         />
-        <button onClick={deleteTodolist}>X</button>
+        <IconButton aria-label="delete" onClick={deleteTodolist}>
+         <DeleteIcon />
+        </IconButton>
       </h3>
       <AddItemForm addItem={AddTask} placeholder={props.placeholder} />
 
@@ -72,36 +90,41 @@ export function Todolist(props: PropsType) {
           }
           return (
             <li key={task.id} className={task.isDone ? "is-done" : ""}>
-              <input
-                type="checkbox"
+              <Checkbox
+                size='small'
+                color="primary"
                 checked={task.isDone}
                 onChange={changeCheckbox}
               />
               <EditableSpan title={task.title} onTitleChange={onTitleChange} />
-              <button onClick={removeTask}>X</button>
+              <IconButton aria-label="delete" size="small" onClick={removeTask}>
+                <DeleteIcon fontSize="small"/>
+              </IconButton>
             </li>
           );
         })}
       </ul>
       <div>
-        <button
+        <Button variant="contained" size="small"
           onClick={onAllButtonClick}
-          className={props.filter === "All" ? "active-filter" : ""}
+          color={props.filter === "All" ? "secondary" : "default"}
         >
           All
-        </button>
-        <button
+        </Button>
+        <ThemeProvider theme={theme}>
+        <Button variant="contained" size="small"
           onClick={onActiveButtonClick}
-          className={props.filter === "Active" ? "active-filter" : ""}
+          color={props.filter === "Active" ? "secondary" : "default"}
         >
           Active
-        </button>
-        <button
+        </Button>
+        <Button variant="contained" size="small"
           onClick={onCompletedButtonClick}
-          className={props.filter === "Completed" ? "active-filter" : ""}
+          color={props.filter === "Completed" ? "secondary" : "default"}
         >
           Completed
-        </button>
+        </Button>
+          </ThemeProvider>
       </div>
     </div>
   );
