@@ -5,17 +5,9 @@ import { v1 } from "uuid";
 import { AddItemForm } from "./AddItemForm";
 import AppBar from "@material-ui/core/AppBar/AppBar";
 import IconButton from "@material-ui/core/IconButton/IconButton";
-import {
-  Container,
-  Grid,
-  MenuItem,
-  Paper,
-  Toolbar,
-  Typography,
-} from "@material-ui/core";
-import Menu from "@material-ui/core/Menu";
+import { Container, Grid, Paper, Toolbar, Typography } from "@material-ui/core";
+import { Menu } from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 
 export type FilterValueType = "All" | "Active" | "Completed";
 export type TasksType = {
@@ -116,15 +108,10 @@ function App() {
     <div className="App">
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="more">
-            <MoreHorizIcon />
+          <IconButton edge="start" color="inherit" aria-label="menu">
+            <Menu />
           </IconButton>
-          {/*<Menu open>*/}
-          {/*  <MenuItem>1</MenuItem>*/}
-          {/*</Menu>*/}
-          <Typography variant="h6" style={{ padding: "20px" }}>
-            Todolist
-          </Typography>
+          <Typography variant="h6">Todolist</Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
