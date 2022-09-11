@@ -13,7 +13,11 @@ export type FilterValueType = "All" | "Active" | "Completed";
 export type TasksType = {
   [id: string]: Array<TaskType>;
 };
-type TodolistsType = { id: string; title: string; filter: FilterValueType };
+export type TodolistsType = {
+  id: string;
+  title: string;
+  filter: FilterValueType;
+};
 
 function App() {
   let todolistId1 = v1();
