@@ -1,3 +1,4 @@
+import React from "react";
 import {
   AddTodolistAC,
   ChangeTodolistAC,
@@ -25,7 +26,7 @@ test("Add todolist", () => {
   let todolistId1 = v1();
   let todolistId2 = v1();
 
-  let newTitle = "Tell me why?";
+  let newTitle: string = "Tell me why?";
 
   const startState: Array<TodolistsType> = [
     { id: todolistId1, title: "What to learn", filter: "All" },

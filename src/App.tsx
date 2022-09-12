@@ -57,7 +57,6 @@ function App() {
     newTitle: string
   ) {
     let newTasks = tasks;
-    console.log(todolistId, taskId, newTitle);
     newTasks[todolistId].map((el) =>
       el.id === taskId ? (el.title = newTitle) : el.title
     );
