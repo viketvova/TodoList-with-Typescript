@@ -51,20 +51,32 @@ export const todolistReducer = (
     case "REMOVE-TODOLIST":
       return [...state.filter((el) => el.id !== action.id)];
     case "ADD-TODOLIST":
-      let newTodolistId = v1();
-      let newTodolist: TodolistsType = {
-        id: newTodolistId,
-        title: action.title,
-        filter: "All",
-      };
-      return [newTodolist, ...state];
+      // Alternative solution
+      // let newTodolistId = v1();
+      // let newTodolist: TodolistsType = {
+      //   id: newTodolistId,
+      //   title: action.title,
+      //   filter: "All",
+      // };
+      // return [newTodolist, ...state];
+      return [{ id: v1(), title: action.title, filter: "All" }, ...state];
     case "CHANGE-TODOLIST-TITLE":
+      // let newState = [...state];
+      // newState.map((el) =>
+      //   el.id === action.id ? (el.title = action.title) : el.title
+      // );
+      // return [...newState];
       return [
         ...state.map((el) =>
           el.id === action.id ? { ...el, title: action.title } : el
         ),
       ];
     case "CHANGE-TODOLIST-FILTER":
+      // let newState = [...state];
+      // newState.map((el) =>
+      //   el.id === action.id ? (el.filter = action.filter) : el.filter
+      // );
+      // return [...newState];
       return [
         ...state.map((el) =>
           el.id === action.id ? { ...el, filter: action.filter } : el
