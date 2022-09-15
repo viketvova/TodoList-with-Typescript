@@ -6,6 +6,7 @@ import {
   RemoveTaskTypeAC,
   tasksReducer,
 } from "./tasks-reducer";
+import { RemoveTodolistAC } from "./todolists-reducer";
 
 let todolistId1: string;
 let todolistId2: string;
@@ -63,4 +64,15 @@ test("Remove correct task from correct todolist", () => {
   );
   expect(endState[todolistId1].length).toBe(4);
   expect(endState[todolistId1][0].title).toBe("JS");
+});
+
+test("property with todolistId should be deleted", () => {
+  const action = RemoveTodolistAC(todolistId2);
+
+  const endState = tasksReducer(startState, action);
+
+  const keys = Object.keys(endState);
+
+  expect(keys.length).toBe(1);
+  expect(endState["todolistId2"]).not.toBeDefined();
 });
